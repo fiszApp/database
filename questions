@@ -1,0 +1,13 @@
+CREATE SCHEMA IF NOT EXISTS questions;
+CREATE ROLE question_role_user;
+CREATE USER questions_user WITH UNENCRYPTED PASSWORD '' ROLE question_role_user;
+GRANT ALL ON ALL TABLES IN SCHEMA questions TO question_role_user;
+GRANT ALL PRIVILEGES ON SCHEMA questions TO question_role_user;
+
+
+GRANT CONNECT ON DATABASE fisz TO questions_user;
+GRANT ALL ON SCHEMA questions TO questions_user;
+GRANT USAGE ON LANGUAGE plpgsql TO questions_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA questions GRANT ALL ON SEQUENCES TO questions_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA questions GRANT ALL ON FUNCTIONS TO questions_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA questions GRANT ALL ON TABLES TO questions_user WITH GRANT OPTION;
